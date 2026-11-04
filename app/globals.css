@@ -1,0 +1,383 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════════════════════════════════════════════
+   SISTEMA DE DISEÑO · TALLERCONECTA  (versión amigable y accesible)
+   Identidad: azul de confianza + fondo cálido + textos oscuros + semáforo funcional
+   Estructura del archivo (mantener este orden):
+     1. TOKENES DE DISEÑO
+     2. CAPA BASE (fondos, tipografía, scroll)
+     3. PRIMITIVAS (botones, inputs, tarjetas, badges)
+     4. PATRONES (paneles, secciones, estadísticas, tablas, estados vacíos)
+     5. ESTADOS FUNCIONALES (semáforo de urgencia)
+     6. CONTENIDO LEGAL
+     7. MOVIMIENTO
+   ══════════════════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. TOKENES ────────────────────────────────────────────────────────────── */
+@theme {
+  /* Azul de confianza y derivados */
+  --color-brand-50: #eff4fb;
+  --color-brand-100: #dbe7f3;
+  --color-brand-200: #bfd7ea;
+  --color-brand-300: #9bc0de;
+  --color-brand-400: #6ea4cf;
+  --color-brand-500: #3d83c1;
+  --color-brand-600: #044a99;
+  --color-brand-700: #033673;
+  --color-brand-800: #022652;
+  --color-brand-900: #011730;
+
+  /* Acento de acción */
+  --color-action-50: #eff4fb;
+  --color-action-100: #dbe7f3;
+  --color-action-200: #bfd7ea;
+  --color-action-300: #9bc0de;
+  --color-action-400: #044a99;
+  --color-action-500: #044a99;
+  --color-action-600: #033673;
+  --color-action-700: #022652;
+
+  /* Semáforo funcional (urgente / recomendado / preventivo) */
+  --color-semaf-rojo: #DC2626;
+  --color-semaf-rojo-soft: #FEF2F2;
+  --color-semaf-ambar: #F59E0B;
+  --color-semaf-ambar-soft: #FFFBEB;
+  --color-semaf-verde: #15803D;
+  --color-semaf-verde-soft: #F0FDF4;
+
+  /* Neutros cálidos */
+  --color-negro-texto: #0F172A;
+  --color-negro-suave: #1E293B;
+  --color-cuerpo: #334155;
+  --color-suelo: #F8FAFC;
+
+  /* Tokens semánticos de superficie y profundidad */
+  --shadow-card: 0 1px 3px rgb(15 23 42 / 0.06), 0 1px 2px rgb(15 23 42 / 0.04);
+  --shadow-lift: 0 10px 24px -6px rgb(15 23 42 / 0.10);
+  --shadow-glow: 0 0 0 1px rgb(4 74 153 / 0.10), 0 12px 32px -10px rgb(4 74 153 / 0.18);
+  --radius-card: 1rem;
+  --radius-sm: 0.6rem;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-heading: var(--font-jakarta), ui-sans-serif, system-ui,
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+}
+
+/* ── 2. CAPA BASE ─────────────────────────────────────────────────────────── */
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-slate-200);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-[#F8FAFC] text-[#0F172A] antialiased overflow-x-hidden;
+    min-height: 100vh;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    @apply text-[#0F172A];
+  }
+  h1 { @apply text-3xl font-extrabold tracking-tight sm:text-4xl; }
+  h2 { @apply text-2xl font-bold tracking-tight sm:text-3xl; }
+  h3 { @apply text-xl font-semibold tracking-tight sm:text-2xl; }
+  a {
+    @apply text-brand-600 underline-offset-4 hover:underline transition-colors;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-slate-300) transparent;
+  }
+}
+
+/* Fondo de página con textura sutil y profundidad */
+.page-shell {
+  @apply min-h-screen bg-[#F8FAFC];
+  background-image:
+    radial-gradient(ellipse 900px 600px at 10% -10%, rgba(4, 74, 153, 0.06), transparent 50%),
+    radial-gradient(ellipse 700px 500px at 110% 110%, rgba(4, 74, 153, 0.04), transparent 50%);
+}
+
+/* ── 3. PRIMITIVAS ────────────────────────────────────────────────────────── */
+
+@utility card {
+  @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
+}
+
+@utility input {
+  @apply w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-[#0F172A] placeholder:text-slate-400
+         focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/25
+         disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400;
+}
+
+@utility label {
+  @apply mb-1.5 block text-sm font-semibold text-slate-600;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold
+         transition-all focus:outline-none focus:ring-2 focus:ring-offset-2
+         disabled:cursor-not-allowed disabled:opacity-60 active:scale-[0.98];
+}
+
+@utility btn-primary {
+  @apply btn bg-brand-600 text-white shadow-sm hover:bg-brand-700 focus:ring-brand-600 hover:shadow-md;
+}
+
+@utility btn-action {
+  @apply btn bg-brand-600 text-white shadow-sm hover:bg-brand-700 focus:ring-brand-600 hover:shadow-md;
+}
+
+@utility btn-secondary {
+  @apply btn border border-slate-300 bg-white text-[#0F172A] hover:bg-slate-100 focus:ring-slate-400 hover:shadow-sm;
+}
+
+@utility btn-success {
+  @apply btn bg-emerald-600 text-white shadow-sm hover:bg-emerald-700 focus:ring-emerald-600 hover:shadow-md;
+}
+
+@utility btn-danger {
+  @apply btn bg-red-600 text-white shadow-sm hover:bg-red-700 focus:ring-red-600 hover:shadow-md;
+}
+
+@utility btn-ghost {
+  @apply btn text-slate-600 hover:bg-slate-100 focus:ring-slate-400;
+}
+
+@utility badge {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-2.5 py-0.5 text-xs font-semibold;
+}
+
+/* Encabezado estándar de página interna */
+@utility page-header {
+  @apply mb-8 flex flex-wrap items-end justify-between gap-4;
+}
+@utility page-title {
+  @apply text-3xl font-extrabold tracking-tight text-[#0F172A] sm:text-4xl;
+}
+@utility page-subtitle {
+  @apply mt-1.5 text-sm text-slate-500;
+}
+@utility kicker {
+  @apply inline-block mb-2 text-xs font-bold uppercase tracking-widest text-brand-600;
+}
+
+/* Estado vacío reutilizable (amigable) */
+@utility empty-state {
+  @apply flex flex-col items-center justify-center rounded-3xl border border-dashed border-slate-300 bg-slate-50/60 px-8 py-16 text-center sm:px-12;
+}
+@utility empty-state-icon {
+  @apply mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 text-2xl;
+}
+
+/* ── 4. PATRONES ──────────────────────────────────────────────────────────── */
+
+@utility panel {
+  @apply rounded-3xl border border-slate-200 bg-white shadow-card;
+}
+
+@utility panel-head {
+  @apply border-b border-slate-100 px-6 py-5 flex flex-wrap items-center justify-between gap-3 rounded-t-3xl;
+}
+
+@utility panel-body {
+  @apply px-6 py-6;
+}
+
+@utility panel-foot {
+  @apply border-t border-slate-100 px-6 py-4 rounded-b-3xl bg-slate-50/40;
+}
+
+@utility section-head {
+  @apply mb-5 flex items-center justify-between gap-3;
+}
+@utility section-title {
+  @apply text-lg font-bold tracking-tight text-[#0F172A];
+}
+@utility section-sub {
+  @apply mt-0.5 text-sm text-slate-500;
+}
+
+@utility chip {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-2.5 py-0.5 text-xs font-semibold;
+}
+@utility chip-dot {
+  @apply inline-flex h-1.5 w-1.5 shrink-0 rounded-full;
+}
+
+@utility stat {
+  @apply rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-card;
+}
+@utility stat-head {
+  @apply flex items-center gap-3;
+}
+@utility stat-value {
+  @apply text-3xl font-extrabold tracking-tight text-[#0F172A] tabular-nums;
+}
+@utility stat-label {
+  @apply text-xs font-bold uppercase tracking-widest text-slate-400;
+}
+@utility stat-sub {
+  @apply mt-1 text-xs text-slate-400;
+}
+
+@utility th {
+  @apply px-4 py-3 text-left text-xs font-semibold tracking-wide text-slate-500 uppercase;
+}
+@utility td {
+  @apply px-4 py-3 text-sm text-[#0F172A];
+}
+
+/* ── 5. ESTADOS FUNCIONALES (semáforo de urgencia) ────────────────────────── */
+
+@utility urgente {
+  @apply rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm font-semibold text-red-800 shadow-sm;
+}
+@utility urgente-dot {
+  @apply inline-flex h-2 w-2 shrink-0 rounded-full bg-red-600;
+}
+@utility recomendado {
+  @apply rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-sm font-semibold text-amber-800 shadow-sm;
+}
+@utility recomendado-dot {
+  @apply inline-flex h-2 w-2 shrink-0 rounded-full bg-amber-500;
+}
+@utility preventivo {
+  @apply rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-800 shadow-sm;
+}
+@utility preventivo-dot {
+  @apply inline-flex h-2 w-2 shrink-0 rounded-full bg-emerald-600;
+}
+
+/* ── 6. CONTENIDO LEGAL ───────────────────────────────────────────────────── */
+
+.prose-legal {
+  @apply text-[15px] leading-relaxed text-slate-700;
+}
+.prose-legal h1 {
+  @apply mb-2 text-3xl font-extrabold tracking-tight text-[#0F172A];
+}
+.prose-legal h2 {
+  @apply mt-9 mb-3 text-xl font-bold text-[#0F172A];
+}
+.prose-legal h3 {
+  @apply mt-6 mb-2 text-base font-bold text-slate-800;
+}
+.prose-legal p,
+.prose-legal li {
+  @apply mb-3;
+}
+.prose-legal ul,
+.prose-legal ol {
+  @apply ml-5 list-disc space-y-1;
+}
+.prose-legal ol {
+  @apply list-decimal;
+}
+.prose-legal strong {
+  @apply font-semibold text-[#0F172A];
+}
+.prose-legal table {
+  @apply my-4 w-full border-collapse text-sm;
+}
+.prose-legal th {
+  @apply border border-slate-200 bg-slate-50 px-3 py-2 text-left font-semibold text-slate-700;
+}
+.prose-legal td {
+  @apply border border-slate-200 px-3 py-2 align-top;
+}
+.prose-legal .aviso {
+  @apply my-5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900 shadow-sm;
+}
+
+/* ── 7. MOVIMIENTO ────────────────────────────────────────────────────────── */
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.page-fade-in {
+  animation: page-fade-in 0.55s ease-out both;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up {
+  animation: fade-in-up 0.5s ease-out both;
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+.pulse-soft {
+  animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Foco visible accesible */
+:focus-visible {
+  @apply outline-none ring-2 ring-brand-500 ring-offset-2 rounded-lg;
+}
+
+/* ── Chat button animations ───────────────────────────────────────────────── */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slide-down {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+.animate-slide-up {
+  animation: slide-up 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.animate-slide-down {
+  animation: slide-down 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ── Modal (native <dialog>) ───────────────────────────────────────────────── */
+dialog {
+  @apply w-full;
+}
+dialog::backdrop {
+  @apply bg-slate-900/50 backdrop-blur-sm;
+  animation: fade-in 0.15s ease-out;
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

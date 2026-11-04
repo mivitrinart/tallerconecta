@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+  <!-- Fondo azul de marca -->
+  <rect width="120" height="120" fill="#2563eb" rx="60"/>
+  
+  <!-- Sombra sutil del círculo -->
+  <circle cx="60" cy="54" r="28" fill="none" stroke="#ffffff" stroke-width="3" opacity="30%"/>
+  
+  <!-- Cuerpo del mecánico (silueta) -->
+  <path d="M50 86 Q45 86 45 78 L45 68 Q45 62 52 60 L68 60 Q75 62 75 68 L75 78 Q75 86 70 86 Z" fill="#ffffff"/>
+  
+  <!-- Cabeza del mecánico -->
+  <circle cx="60" cy="44" r="10" fill="#ffffff"/>
+  
+  <!-- Brazos -->
+  <path d="M52 60 Q48 64 44 66" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  <path d="M68 60 Q72 64 76 66" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Llave inglesa -->
+  <path d="M76 68 Q82 68 86 74 L90 78 Q92 82 90 86 L84 86 Q80 86 78 82 L74 78 Q70 74 70 68 Z" fill="#ffffff"/>
+  <path d="M84 82 Q82 80 78 78 Q76 76 76 74 Q76 72 78 70 Q80 68 84 68 Q88 68 90 70 Q92 72 92 74 Q92 78 90 82 Q86 84 84 82 Z" fill="none" stroke="#2563eb" stroke-width="3"/>
+  
+  <!-- Detalle de la llave (ojo de la llave) -->
+  <circle cx="84" cy="82" r="4" fill="#2563eb"/>
+  
+  <!-- Siglas TC abajo -->
+  <text x="60" y="108" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#ffffff" text-anchor="middle">TC</text>
+</svg>

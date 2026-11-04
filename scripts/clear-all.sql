@@ -1,0 +1,16 @@
+DELETE FROM audit_logs;
+DELETE FROM notifications;
+DELETE FROM order_events;
+DELETE FROM messages;
+DELETE FROM order_media;
+DELETE FROM authorizations;
+DELETE FROM estimate_items;
+DELETE FROM estimates;
+DELETE FROM diagnostics;
+DELETE FROM invoices;
+DELETE FROM service_orders;
+DELETE FROM vehicles;
+DELETE FROM customer_account_links;
+DELETE FROM customer_accounts;
+DELETE FROM customers;
+DELETE FROM email_verification_codes;

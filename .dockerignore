@@ -1,0 +1,12 @@
+node_modules
+.next
+.data
+.git
+*.tsbuildinfo
+docs
+tests/smoke-e2e.py
+.env
+.env.*
+!.env.example
+.vscode
+prisma

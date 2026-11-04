@@ -1,0 +1,63 @@
+{
+  "name": "tallerconecta",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-10-28",
+  "compatibility_flags": ["nodejs_compat"],
+
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+
+  "d1_databases": [
+    {
+      "binding": "taller_conecta_db",
+      "database_name": "taller-conecta-db",
+      "database_id": "9819e31e-30d5-466d-afa3-d28e536de6a6"
+    }
+  ],
+
+  // TODO: Reactivar R2 una vez habilitado el bucket en el Cloudflare Dashboard.
+  // "r2_buckets": [
+  //   {
+  //     "binding": "EVIDENCIAS_BUCKET",
+  //     "bucket_name": "taller-conecta-evidencias"
+  //   }
+  // ],
+
+  "kv_namespaces": [
+    {
+      "binding": "RATE_LIMIT_KV",
+      "id": "3c38c764565c4429b4b453d7d31419f4"
+    }
+  ],
+
+  // Variables NO sensibles. NUNCA pongas secretos aquí (se commitean).
+  // Secretos: npx wrangler secret put SMTP_API_KEY  /  npx wrangler secret put JWT_SECRET / npx wrangler secret put AUTH_SECRET
+  "vars": {
+    "SMTP_API_URL": "https://api.mailtrap.io/api/send",
+    "SMTP_FROM": "Taller Conecta <no-reply@tallerconecta.co>",
+    "SMTP_HOST": "smtp.mailtrap.io",
+    "SMTP_PORT": "587"
+  },
+
+  "observability": {
+    "enabled": true
+  },
+
+  "triggers": {
+    "crons": [
+      "0 3 * * *",
+      "0 4 * * *",
+      "0 * * * *",
+      "*/15 * * * *"
+    ]
+  },
+
+  // Custom Domain — configurar en dashboard: Workers → tallerconecta → Settings → Triggers → Custom Domains
+  // Añadir: "tallerconecta.co", "www.tallerconecta.co"
+  // Requiere DNS CNAME @ -> tallerconecta.<subdomain>.workers.dev
+  // y certificado TLS válido (Cloudflare lo gestiona con proxy naranja).
+  // Una vez configurado, actualizar SMTP_FROM y cookies __Host- para usar tallerconecta.co
+  // "custom_domains": ["tallerconecta.co", "www.tallerconecta.co"]
+}

@@ -1,0 +1,18 @@
+# Blueprint de Render: crear un Web Service gratuito desde el Dockerfile.
+# En render.com → New → Blueprint → conectar el repositorio GitHub.
+services:
+  - type: web
+    name: taller-conecta
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: AUTH_SECRET
+        generateValue: true # secreto firmado de sesiones, generado por Render
+      - key: DATA_MODE
+        value: demo
+      - key: NODE_ENV
+        value: production
+    # ⚠ Plan gratuito de Render: disco EPÍMERO (los datos demo se reinician en
+    # cada deploy/reinicio). Para un piloto con datos persistentes usa Railway
+    # con volumen (ver docs/DESPLIEGUE.md) o conecta Supabase.

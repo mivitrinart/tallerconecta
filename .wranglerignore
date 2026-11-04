@@ -1,0 +1,19 @@
+# Excluir caché de Turbopack (archivos grandes que exceden el límite de 25 MiB de Pages)
+**/turbopack/**
+.next/cache/
+
+# Excluir archivos de desarrollo
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Excluir datos demo
+.data/
+
+# Excluir node_modules
+node_modules/
+
+# Excluir archivos de tipo
+tsconfig.tsbuildinfo
